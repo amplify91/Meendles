@@ -25,6 +25,7 @@ public class Meendle {
 	public static final Texture BLUE_TRIANGLE = new Texture("bluetriangle.png");
 	public static final Texture BLUE_SQUARE = new Texture("bluesquare.png");
 	public static final Texture SELECTED = new Texture("selected.png");
+	public static final Texture UGLY = new Texture("ugly.png");
 	
 	public Meendle(float x, float y){
 		mPosX = x;

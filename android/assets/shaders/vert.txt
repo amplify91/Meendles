@@ -1,0 +1,23 @@
+uniform mat4 u_projTrans;
+
+attribute vec2 a_position;
+attribute vec2 a_texCoord0;
+attribute vec4 a_color;
+attribute vec3 a_color1;
+attribute vec3 a_color2;
+attribute vec3 a_color3;
+
+varying vec4 vColor;
+varying vec3 vColor1;
+varying vec3 vColor2;
+varying vec3 vColor3;
+varying vec2 vTexCoord;
+ 
+void main() {
+	vColor = a_color;
+	vColor1 = a_color1;
+	vColor2 = a_color2;
+	vColor3 = a_color3;
+	vTexCoord = a_texCoord0;
+	gl_Position = u_projTrans * vec4(a_position, 0.0, 1.0);
+}

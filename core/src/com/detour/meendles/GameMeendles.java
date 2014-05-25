@@ -2,9 +2,11 @@ package com.detour.meendles;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 public class GameMeendles extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -21,11 +23,31 @@ public class GameMeendles extends ApplicationAdapter {
 	static Meendle mPet5;
 	static Meendle mPet6;
 	
+	ShaderProgram program;
+	
 	public static Meendle[] mPets;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		
+		try {
+			
+			FileHandle vertex = Gdx.files.internal("shaders/vert.txt");
+			FileHandle fragment = Gdx.files.internal("shaders/frag.txt");
+		    //create our shader program -- be sure to pass SpriteBatch's default attributes!
+		    program = new ShaderProgram(vertex, fragment);
+		    
+
+		    //Good idea to log any warnings if they exist
+		    if (program.getLog().length()!=0)
+		        System.out.println(program.getLog());
+
+		    //create our sprite batch
+		    batch = new SpriteBatch(1000, program);
+		} catch (Exception e) { 
+			System.out.println("Shader's fucked.");
+		}
+		
 		breed = new Texture("breed.png");
 		width = Gdx.graphics.getWidth();
 		w = width/6;
@@ -37,8 +59,11 @@ public class GameMeendles extends ApplicationAdapter {
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		batch.begin();
+		program.setAttributef("a_color1", 1f, 0f, 0f, 0f);
+	    program.setAttributef("a_color2", 0f, 1f, 0f, 0f);
+	    program.setAttributef("a_color3", 0f, 0f, 1f, 0f);
 		batch.draw(breed, width/3f, height - (width/3f), width/3f, width/3f);
 		mPet1.draw(batch);
 		mPet2.draw(batch);

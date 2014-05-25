@@ -1,0 +1,21 @@
+varying vec4 vColor;
+varying vec3 vColor1;
+varying vec3 vColor2;
+varying vec3 vColor3;
+varying vec2 vTexCoord;
+
+uniform sampler2D u_texture;
+
+void main(void) {
+    vec4 mask = texture2D(u_texture, vTexCoord);
+    
+    vec3 color;
+    float red = vColor1.r + vColor2.r + vColor3.r;
+    float green = vColor1.g + vColor2.g + vColor3.g;
+    float blue = vColor1.b + vColor2.b + vColor3.b;
+    color.r = (vColor1.r*mask.r + vColor2.r*mask.g + vColor3.r*mask.b) / red;
+    color.g = (vColor1.g*mask.r + vColor2.g*mask.g + vColor3.g*mask.b) / green;
+    color.b = (vColor1.b*mask.r + vColor2.b*mask.g + vColor3.b*mask.b) / blue;
+    
+    gl_FragColor = vColor * vec4(color, mask.a);
+}
