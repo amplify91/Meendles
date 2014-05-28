@@ -1,17 +1,17 @@
 package com.detour.meendles;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Meendle {
+public class Meendle extends Sprite{
 	
 	private Genome mGenome = null;
 	Texture mBody = null;
 	Texture mDesign = null;
 	Texture mSelected = SELECTED;
 	private boolean isSelected = false;
-	public float mPosX = 0;
-	public float mPosY = 0;
 	public static final float WIDTH = 100;
 	public static final float HEIGHT = 100;
 	
@@ -56,6 +56,12 @@ public class Meendle {
 		}
 		sb.draw(mBody, mPosX, mPosY, WIDTH, HEIGHT);
 		sb.draw(mDesign, mPosX+WIDTH/4f, mPosY+HEIGHT/4f, WIDTH/2f, HEIGHT/2f);
+		
+		/*for(BodyPart root: mBodyParts){
+			if(root.isRoot()){
+				root.draw();
+			}
+		}*/
 	}
 	
 	public void createRandom(){

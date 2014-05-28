@@ -9,8 +9,7 @@ public class Gene {
 	
 	float mDominance;
 	
-	public Gene(int location, String name, String abbr, String descr){
-		mLocation = location;
+	public Gene(String name, String abbr, String descr){
 		mName = name;
 		mAbbreviation = abbr;
 		mDescription = descr;
@@ -23,6 +22,14 @@ public class Gene {
 			alleles[i].mDominance = (float)(i+1) * x;
 		}
 		
+	}
+	
+	public int getLocation(){
+		return mLocation;
+	}
+	
+	public void setLocation(int location){
+		mLocation = location;
 	}
 	
 	public float getDominanceFactor(){

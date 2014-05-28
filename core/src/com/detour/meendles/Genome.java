@@ -6,6 +6,7 @@ public class Genome {
 	
 	Gene[][] mGenome = new Gene[2][GENOME_LENGTH];
 	public static final Gene[][] mCompleteGenome = new Gene[][]{GeneBodyColor.ALLELES,GeneBodyShape.ALLELES,GeneDesignColor.ALLELES,GeneDesignShape.ALLELES}; //TODO needs generated
+	private static boolean isInitialized = false;
 	
 	int mBodyColor;
 	int mBodyShape;
@@ -18,9 +19,11 @@ public class Genome {
 	
 	public Genome(Gene[][] genome){
 		mGenome = genome;
+		initializeGenome(mCompleteGenome);
 	}
 	
 	public Genome(Meendle mother, Meendle father){
+		initializeGenome(mCompleteGenome);
 		generateFromParents(mother, father);
 	}
 	
@@ -60,6 +63,17 @@ public class Genome {
 		for(int i=0;i<GENOME_LENGTH;i++){
 			mGenome[CHROMATID_LEFT][i] = mother.getGenome().getRandomGene(i);
 			mGenome[CHROMATID_RIGHT][i] = father.getGenome().getRandomGene(i);
+		}
+	}
+	
+	private static void initializeGenome(Gene[][] genome){
+		if(!isInitialized){
+			for(int i = 0;i<genome.length;i++){
+				for(int j = 0;j<genome[i].length;j++){
+					genome[i][j].setLocation(i);
+				}
+			}
+			isInitialized = true;
 		}
 	}
 	

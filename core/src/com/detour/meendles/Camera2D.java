@@ -13,13 +13,29 @@ public class Camera2D {
 	private float mScreenHeight;
 	private float mScreenWidthPixels;
 	private float mScreenHeightPixels;
+	private float mViewRatio;
+	private float mZoom;
 	
 	public Camera2D(float viewportWidth, float viewportHeight){
-		mCamera = new OrthographicCamera(viewportWidth, viewportHeight);
-		mCamera.position.set(viewportWidth/2f, viewportHeight/2f, 0);
+		reset(viewportWidth, viewportHeight);
+	}
+	
+	public void follow(IFocusable focus) {
+		mCamera.position.set(focus.getX()-focus.getCameraOffsetX(), focus.getY()-focus.getCameraOffsetY(), 0);
 		mCamera.update();
+	}
+	
+	public void reset(){
+		reset(mScreenWidth, mScreenHeight);
+	}
+	
+	public void reset(float viewportWidth, float viewportHeight){
 		mScreenWidth = viewportWidth;
 		mScreenHeight = viewportHeight;
+		mViewRatio = mScreenWidth/mScreenHeight;
+		mCamera = new OrthographicCamera(mScreenWidth, mScreenHeight);
+		mCamera.position.set(mScreenWidth/2f, mScreenHeight/2f, 0);
+		mCamera.update();
 		
 		//maybe unnecessary OpenGL stuff
 		Gdx.gl.glEnable(GL20.GL_DEPTH_TEST);
@@ -36,16 +52,6 @@ public class Camera2D {
 		Gdx.gl.glTexParameterf(GL20.GL_TEXTURE_2D, GL20.GL_TEXTURE_MAG_FILTER, GL20.GL_LINEAR);
 		Gdx.gl.glTexParameterf(GL20.GL_TEXTURE_2D, GL20.GL_TEXTURE_WRAP_S, GL20.GL_CLAMP_TO_EDGE);
 		Gdx.gl.glTexParameterf(GL20.GL_TEXTURE_2D, GL20.GL_TEXTURE_WRAP_T, GL20.GL_CLAMP_TO_EDGE);
-	}
-	
-	public void update(IFocusable focus) {
-		mCamera.position.set(focus.getX()-focus.getCameraOffsetX(), focus.getY()-focus.getCameraOffsetY(), 0);
-		mCamera.update();
-	}
-	
-	public void reset(){
-		mCamera.position.set(mScreenWidth/2f, mScreenHeight/2f, 0);
-		mCamera.update();
 	}
 	
 	public OrthographicCamera getCamera(){

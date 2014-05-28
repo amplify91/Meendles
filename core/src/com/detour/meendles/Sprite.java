@@ -2,19 +2,19 @@ package com.detour.meendles;
 
 public class Sprite implements IFocusable{
 	
-	protected float mX;
-	protected float mY;
+	protected float mPosX;
+	protected float mPosY;
 	protected float mCameraOffsetX = 0;
 	protected float mCameraOffsetY = 0;
 	
 	@Override
 	public float getX() {
-		return mX;
+		return mPosX;
 	}
 
 	@Override
 	public float getY() {
-		return mY;
+		return mPosY;
 	}
 
 	@Override

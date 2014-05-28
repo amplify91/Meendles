@@ -1,64 +1,50 @@
 package com.detour.meendles;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.utils.TimeUtils;
 
-public class GameMeendles extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture breed;
+public class GameMeendles extends Game {
 	
-	static int width;
-	static int w;
-	static int height;
+	long mLastTime = 0;
+	long mCurrentTime;
+	float mDeltaTime;
 	
-	static Meendle mPet1;
-	static Meendle mPet2;
-	static Meendle mPet3;
-	static Meendle mPet4;
-	static Meendle mPet5;
-	static Meendle mPet6;
+	public static ScreenTitle mTitleScreen;
 	
-	ShaderProgram program;
+	private static final GameMeendles mGame = new GameMeendles();
 	
-	public static Meendle[] mPets;
+	private GameMeendles(){
+		
+	}
 	
 	@Override
 	public void create () {
-		
-		try {
-			
-			FileHandle vertex = Gdx.files.internal("shaders/vert.txt");
-			FileHandle fragment = Gdx.files.internal("shaders/frag.txt");
-		    //create our shader program -- be sure to pass SpriteBatch's default attributes!
-		    program = new ShaderProgram(vertex, fragment);
-		    
-
-		    //Good idea to log any warnings if they exist
-		    if (program.getLog().length()!=0)
-		        System.out.println(program.getLog());
-
-		    //create our sprite batch
-		    batch = new SpriteBatch(1000, program);
-		} catch (Exception e) { 
-			System.out.println("Shader's fucked.");
-		}
-		
-		breed = new Texture("breed.png");
-		width = Gdx.graphics.getWidth();
-		w = width/6;
-		height = Gdx.graphics.getHeight();
-		Gdx.input.setInputProcessor(new Input());
-		init();
+		mTitleScreen = new ScreenTitle();
+		setScreen(mTitleScreen);
 	}
 
 	@Override
 	public void render () {
+		
+		mCurrentTime = TimeUtils.nanoTime();
+		if(mLastTime==0){
+			mLastTime = mCurrentTime-1;
+		}
+		mDeltaTime = ((float)(mCurrentTime - mLastTime))/1000000000f;
+		
 		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
+		getScreen().render(mDeltaTime);
+		
+		mLastTime = mCurrentTime;
+		
+		/*Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		batch.begin();
 		program.setAttributef("a_color1", 1f, 0f, 0f, 0f);
@@ -71,49 +57,11 @@ public class GameMeendles extends ApplicationAdapter {
 		mPet4.draw(batch);
 		mPet5.draw(batch);
 		mPet6.draw(batch);
-		batch.end();
+		batch.end();*/
 	}
 	
-	private static void init(){
-		
-		//int h = height/6;
-		
-		mPet1 = new Meendle(0, 0);
-		mPet2 = new Meendle(w, 0);
-		mPet3 = new Meendle(w*2, 0);
-		mPet4 = new Meendle(w*3, 0);
-		mPet5 = new Meendle(w*4, 0);
-		mPet6 = new Meendle(w*5, 0);
-		mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4,mPet5,mPet6};
-		
-		
-	}
-	
-	public static void breedNewGeneration(){
-		
-		Meendle mother=null;
-		Meendle father=null;
-		for(int i=0;i<mPets.length;i++){
-			if(mPets[i].isSelected()){
-				mother = mPets[i];
-			}
-		}
-		for(int i=mPets.length-1;i>-1;i--){
-			if(mPets[i].isSelected()){
-				father = mPets[i];
-			}
-		}
-		if(mother!=null && father!=null){
-			mPet1 = new Meendle(0, 0, mother, father);
-			mPet2 = new Meendle(w, 0, mother, father);
-			mPet3 = new Meendle(w*2, 0, mother, father);
-			mPet4 = new Meendle(w*3, 0, mother, father);
-			mPet5 = new Meendle(w*4, 0, mother, father);
-			mPet6 = new Meendle(w*5, 0, mother, father);
-			mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4,mPet5,mPet6};
-		}else{
-			init();
-		}
+	public static GameMeendles getGame(){
+		return mGame;
 	}
 	
 }

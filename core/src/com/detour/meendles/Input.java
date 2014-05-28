@@ -33,14 +33,14 @@ public class Input implements InputProcessor{
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		//System.out.println("touchUp at "+screenX + ", " + screenY);
 		if(screenY>=Gdx.graphics.getHeight()-Meendle.HEIGHT){
-			for(int i=0;i<GameMeendles.mPets.length;i++){
-				if(screenX>GameMeendles.mPets[i].mPosX && screenX<GameMeendles.mPets[i].mPosX+Meendle.WIDTH){
-					GameMeendles.mPets[i].toggleSelected();
+			for(int i=0;i<ScreenTitle.mPets.length;i++){
+				if(screenX>ScreenTitle.mPets[i].mPosX && screenX<ScreenTitle.mPets[i].mPosX+Meendle.WIDTH){
+					ScreenTitle.mPets[i].toggleSelected();
 					return true;
 				}
 			}
 		}else if(screenY<=Gdx.graphics.getWidth()/3f && screenX>=Gdx.graphics.getWidth()/3f &&  screenX<=(Gdx.graphics.getWidth()/3f)*2){
-			GameMeendles.breedNewGeneration();
+			ScreenTitle.breedNewGeneration();
 		}
 		return false;
 	}

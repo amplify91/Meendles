@@ -17,7 +17,7 @@ public class GeneDesignShape extends GeneTypeSingleTrait{
 	public static final Gene[] ALLELES = new Gene[]{DESIGN_SHAPE_CIRCLE,DESIGN_SHAPE_TRIANGLE,DESIGN_SHAPE_SQUARE};
 	
 	public GeneDesignShape(int shape, String name, String abbr, String descr){
-		super(shape, 3, name, abbr, descr);
+		super(shape, name, abbr, descr);
 		//setAlleleDominances(new Gene[]{DESIGN_SHAPE_CIRCLE,DESIGN_SHAPE_TRIANGLE,DESIGN_SHAPE_SQUARE});
 	}
 	

@@ -7,6 +7,6 @@ import com.detour.meendles.GameMeendles;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new GameMeendles(), config);
+		new LwjglApplication(GameMeendles.getGame(), config);
 	}
 }

@@ -17,7 +17,7 @@ public class GeneDesignColor extends GeneTypeSingleTrait{
 	public static final Gene[] ALLELES = new Gene[]{DESIGN_COLOR_RED,DESIGN_COLOR_BLUE,DESIGN_COLOR_YELLOW};
 	
 	public GeneDesignColor(int color, String name, String abbr, String descr){
-		super(color, 2, name, abbr, descr);
+		super(color, name, abbr, descr);
 		//setAlleleDominances(new Gene[]{DESIGN_COLOR_RED, DESIGN_COLOR_BLUE, DESIGN_COLOR_YELLOW});
 	}
 

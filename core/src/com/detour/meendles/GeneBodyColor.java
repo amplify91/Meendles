@@ -17,7 +17,7 @@ public class GeneBodyColor extends GeneTypeSingleTrait{
 	public static final Gene[] ALLELES = new Gene[]{BODY_COLOR_BLUE,BODY_COLOR_YELLOW,BODY_COLOR_RED};
 	
 	public GeneBodyColor(int color, String name, String abbr, String descr){
-		super(color, 0, name, abbr, descr);
+		super(color, name, abbr, descr);
 		//setAlleleDominances(new Gene[]{BODY_COLOR_BLUE, BODY_COLOR_YELLOW, BODY_COLOR_RED});
 	}
 
