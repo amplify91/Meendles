@@ -2,6 +2,7 @@ package com.detour.meendles;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -12,8 +13,8 @@ public class Meendle extends Sprite{
 	Texture mDesign = null;
 	Texture mSelected = SELECTED;
 	private boolean isSelected = false;
-	public static final float WIDTH = 100;
-	public static final float HEIGHT = 100;
+	public static final float WIDTH = Gdx.graphics.getWidth() / 8f;
+	public static final float HEIGHT = WIDTH;
 	
 	public static final Texture RED_CIRCLE = new Texture("redcircle.png");
 	public static final Texture RED_TRIANGLE = new Texture("redtriangle.png");
