@@ -43,9 +43,9 @@ import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.utils.Array;
 
 public class SkeletonRenderer {
-	static private final short[] quadTriangles = {0, 1, 2, 2, 3, 0};
+	protected static final short[] quadTriangles = {0, 1, 2, 2, 3, 0};
 
-	private boolean premultipliedAlpha;
+	protected boolean premultipliedAlpha;
 
 	@SuppressWarnings("null")
 	public void draw (PolygonSpriteBatch batch, Skeleton skeleton) {

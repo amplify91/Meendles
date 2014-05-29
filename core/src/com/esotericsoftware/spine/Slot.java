@@ -36,7 +36,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.FloatArray;
 
 public class Slot {
-	final SlotData data;
+	public final SlotData data;
 	final Bone bone;
 	private final Skeleton skeleton;
 	final Color color;

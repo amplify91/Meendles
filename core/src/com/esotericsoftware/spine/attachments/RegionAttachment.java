@@ -40,6 +40,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.NumberUtils;
 
 /** Attachment that displays a texture region. */
@@ -59,6 +60,7 @@ public class RegionAttachment extends Attachment {
 	private final float[] vertices = new float[20];
 	private final float[] offset = new float[8];
 	private final Color color = new Color(1, 1, 1, 1);
+	private Vector3[] colors = null;
 
 	public RegionAttachment (String name) {
 		super(name);
@@ -264,5 +266,13 @@ public class RegionAttachment extends Attachment {
 
 	public void setPath (String path) {
 		this.path = path;
+	}
+	
+	public Vector3[] getColors () {
+		return colors;
+	}
+
+	public void setColors (Vector3[] colors) {
+		this.colors = colors;
 	}
 }

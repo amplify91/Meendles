@@ -33,10 +33,10 @@ package com.esotericsoftware.spine.attachments;
 import com.esotericsoftware.spine.Bone;
 import com.esotericsoftware.spine.Skeleton;
 import com.esotericsoftware.spine.Slot;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.FloatArray;
 import com.badlogic.gdx.utils.NumberUtils;
 
@@ -48,6 +48,7 @@ public class MeshAttachment extends Attachment {
 	private short[] triangles;
 	private float[] worldVertices;
 	private final Color color = new Color(1, 1, 1, 1);
+	private Vector3[] colors = null;
 	private int hullLength;
 
 	// Nonessential.
@@ -164,6 +165,14 @@ public class MeshAttachment extends Attachment {
 
 	public void setPath (String path) {
 		this.path = path;
+	}
+	
+	public Vector3[] getColors () {
+		return colors;
+	}
+
+	public void setColors (Vector3[] colors) {
+		this.colors = colors;
 	}
 
 	public int getHullLength () {
