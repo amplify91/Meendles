@@ -49,7 +49,6 @@ public class SkinnedMeshAttachment extends Attachment {
 	private short[] triangles;
 	private float[] worldVertices;
 	private final Color color = new Color(1, 1, 1, 1);
-	private Vector3[] colors = null;
 	private int hullLength;
 
 	// Nonessential.
@@ -202,14 +201,6 @@ public class SkinnedMeshAttachment extends Attachment {
 
 	public void setPath (String path) {
 		this.path = path;
-	}
-	
-	public Vector3[] getColors () {
-		return colors;
-	}
-
-	public void setColors (Vector3[] colors) {
-		this.colors = colors;
 	}
 
 	public int getHullLength () {

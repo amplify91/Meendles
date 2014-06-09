@@ -60,7 +60,6 @@ public class RegionAttachment extends Attachment {
 	private final float[] vertices = new float[20];
 	private final float[] offset = new float[8];
 	private final Color color = new Color(1, 1, 1, 1);
-	private Vector3[] colors = null;
 
 	public RegionAttachment (String name) {
 		super(name);
@@ -266,13 +265,5 @@ public class RegionAttachment extends Attachment {
 
 	public void setPath (String path) {
 		this.path = path;
-	}
-	
-	public Vector3[] getColors () {
-		return colors;
-	}
-
-	public void setColors (Vector3[] colors) {
-		this.colors = colors;
 	}
 }

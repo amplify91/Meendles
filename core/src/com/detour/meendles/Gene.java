@@ -1,13 +1,14 @@
 package com.detour.meendles;
 
-public class Gene {
+public abstract class Gene {
 	
-	int mLocation;
-	String mName;
-	String mAbbreviation;
-	String mDescription;
+	private int mLocation;
+	private String mName;
+	private String mAbbreviation;
+	private String mDescription;
 	
-	float mDominance;
+	private int mAlleleNumber;
+	private float mDominance;
 	
 	public Gene(String name, String abbr, String descr){
 		mName = name;
@@ -32,8 +33,28 @@ public class Gene {
 		mLocation = location;
 	}
 	
+	public int getAlleleNumber(){
+		return mAlleleNumber;
+	}
+	
+	public void setAlleleNumber(int alleleNumber){
+		mAlleleNumber = alleleNumber;
+	}
+	
 	public float getDominanceFactor(){
 		return mDominance;
+	}
+	
+	public String getName(){
+		return mName;
+	}
+	
+	public String getAbbreviation(){
+		return mAbbreviation;
+	}
+	
+	public String getDescription(){
+		return mDescription;
 	}
 	
 }

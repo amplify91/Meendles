@@ -1,12 +1,28 @@
 package com.detour.meendles;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Vector3;
+import com.detour.meendles.genes.GeneBodyColor;
+import com.detour.meendles.genes.GeneBodyShape;
+import com.detour.meendles.genes.GeneDesignColor;
+import com.detour.meendles.genes.GeneDesignShape;
+import com.esotericsoftware.spine.AnimationState;
+import com.esotericsoftware.spine.AnimationStateData;
+import com.esotericsoftware.spine.Skeleton;
+import com.esotericsoftware.spine.SkeletonData;
+import com.esotericsoftware.spine.SkeletonJson;
 
 public class Meendle extends Sprite{
+	
+	private MeendleData mData;
+	private static MeendleRenderer mRenderer = new MeendleRenderer();//TODO
+	private Skeleton mSkeleton;
+	private AnimationState mState;
+	//private static TextureAtlas mMeendlesTextureAtlas = new TextureAtlas(Gdx.files.internal("spineboy/spineboy.atlas"));
 	
 	private Genome mGenome = null;
 	Texture mBody = null;
@@ -27,6 +43,25 @@ public class Meendle extends Sprite{
 	public static final Texture BLUE_SQUARE = new Texture("bluesquare.png");
 	public static final Texture SELECTED = new Texture("selected.png");
 	public static final Texture UGLY = new Texture("ugly.png");
+	
+	public Meendle(){
+		/*SkeletonJson json = new SkeletonJson(mMeendlesTextureAtlas); // This loads skeleton JSON data, which is stateless.
+		//json.setScale(0.6f); // Load the skeleton at 60% the size it was in Spine.
+		SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal("spineboy/spineboy.json"));
+
+		mSkeleton = new Skeleton(skeletonData); // Skeleton holds skeleton state (bone positions, slot attachments, etc).
+		mSkeleton.setPosition(250, 20);
+
+		AnimationStateData stateData = new AnimationStateData(skeletonData); // Defines mixing (crossfading) between animations.
+		//stateData.setMix("run", "jump", 0.2f);
+		//stateData.setMix("jump", "run", 0.2f);
+
+		mState = new AnimationState(stateData); // Holds the animation state for a skeleton (current animation, time, etc).
+		//mState.setTimeScale(0.5f); // Slow all animations down to 50% speed.
+		//mState.setAnimation(0, "run", true);
+		//mState.addAnimation(0, "jump", false, 2); // Jump after 2 seconds.
+		//mState.addAnimation(0, "run", true, 0); // Run after the jump.*/
+	}
 	
 	public Meendle(float x, float y){
 		mPosX = x;
@@ -58,11 +93,15 @@ public class Meendle extends Sprite{
 		sb.draw(mBody, mPosX, mPosY, WIDTH, HEIGHT);
 		sb.draw(mDesign, mPosX+WIDTH/4f, mPosY+HEIGHT/4f, WIDTH/2f, HEIGHT/2f);
 		
-		/*for(BodyPart root: mBodyParts){
-			if(root.isRoot()){
-				root.draw();
-			}
-		}*/
+	}
+	
+	public void draw(SpriteBatch batch, ShaderProgram shader){
+		mRenderer.setMeendle(this);
+		mRenderer.draw(batch, mSkeleton, shader);
+	}
+	
+	public Vector3[] getBodyPartColors(String name){
+		return new Vector3[]{};
 	}
 	
 	public void createRandom(){
@@ -152,6 +191,14 @@ public class Meendle extends Sprite{
 	
 	public void setGenome(Genome genome){
 		mGenome = genome;
+	}
+	
+	public Skeleton getSkeleton(){
+		return mSkeleton;
+	}
+	
+	public void setSkeleton(Skeleton skeleton){
+		mSkeleton = skeleton;
 	}
 	
 	public void toggleSelected(){

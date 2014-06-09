@@ -23,11 +23,10 @@ public class MeendleRenderer extends SkeletonRenderer{
 	private final static int BLUE = 2;
 	private final static int GREEN = 3;
 	
+	private Meendle mMeendle;
+	
 	@SuppressWarnings("null")
-	public void draw(PolygonSpriteBatch batch, Skeleton skeleton, ShaderProgram shader, Vector3[] colors){
-		if(!shader.isCompiled() || colors.length != 3){
-			//error
-		}
+	public void draw(PolygonSpriteBatch batch, Skeleton skeleton, ShaderProgram shader){
 		
 		boolean premultipliedAlpha = this.premultipliedAlpha;
 		int srcFunc = premultipliedAlpha ? GL20.GL_ONE : GL20.GL_SRC_ALPHA;
@@ -40,6 +39,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 		Array<Slot> drawOrder = skeleton.getDrawOrder();
 		for (int i = 0, n = drawOrder.size; i < n; i++) {
 			Slot slot = drawOrder.get(i);
+			setColors(slot.getData().getName(), shader, batch);
 			Attachment attachment = slot.getAttachment();
 			Texture texture = null;
 			if (attachment instanceof RegionAttachment) {
@@ -48,7 +48,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 				vertices = region.getWorldVertices();
 				triangles = quadTriangles;
 				texture = region.getRegion().getTexture();
-				setColors(region.getColors(), shader);
+				//setColors(region.getName(), shader, batch);
 
 			} else if (attachment instanceof MeshAttachment) {
 				MeshAttachment mesh = (MeshAttachment)attachment;
@@ -56,7 +56,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 				vertices = mesh.getWorldVertices();
 				triangles = mesh.getTriangles();
 				texture = mesh.getRegion().getTexture();
-				setColors(mesh.getColors(), shader);
+				//setColors(mesh.getName(), shader, batch);
 
 			} else if (attachment instanceof SkinnedMeshAttachment) {
 				SkinnedMeshAttachment mesh = (SkinnedMeshAttachment)attachment;
@@ -64,7 +64,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 				vertices = mesh.getWorldVertices();
 				triangles = mesh.getTriangles();
 				texture = mesh.getRegion().getTexture();
-				setColors(mesh.getColors(), shader);
+				//setColors(mesh.getName(), shader, batch);
 
 			} else if (attachment instanceof SkeletonAttachment) {
 				Skeleton attachmentSkeleton = ((SkeletonAttachment)attachment).getSkeleton();
@@ -102,10 +102,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 		
 	}
 	
-	public void draw(Batch batch, Skeleton skeleton, ShaderProgram shader, Vector3[] colors){
-		if(!shader.isCompiled() || colors.length != 3){
-			//error
-		}
+	public void draw(Batch batch, Skeleton skeleton, ShaderProgram shader){
 		
 		boolean premultipliedAlpha = this.premultipliedAlpha;
 		int srcFunc = premultipliedAlpha ? GL20.GL_ONE : GL20.GL_SRC_ALPHA;
@@ -116,6 +113,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 		Array<Slot> drawOrder = skeleton.getDrawOrder();
 		for (int i = 0, n = drawOrder.size; i < n; i++) {
 			Slot slot = drawOrder.get(i);
+			setColors(slot.getData().getName(), shader, batch);
 			Attachment attachment = slot.getAttachment();
 			if (attachment instanceof RegionAttachment) {
 				RegionAttachment regionAttachment = (RegionAttachment)attachment;
@@ -128,7 +126,7 @@ public class MeendleRenderer extends SkeletonRenderer{
 					else
 						batch.setBlendFunction(srcFunc, GL20.GL_ONE_MINUS_SRC_ALPHA);
 				}
-				setColors(regionAttachment.getColors(), shader);
+				//setColors(regionAttachment.getName(), shader, batch);
 				batch.draw(regionAttachment.getRegion().getTexture(), vertices, 0, 20);//TODO
 			} else if (attachment instanceof MeshAttachment || attachment instanceof SkinnedMeshAttachment) {
 				throw new RuntimeException("PolygonSpriteBatch is required to render meshes.");
@@ -157,13 +155,20 @@ public class MeendleRenderer extends SkeletonRenderer{
 		}
 	}
 	
-	private void setColors(Vector3[] colors, ShaderProgram shader){
-		if(colors!=null){
-			//batch.flush();//hopefully don't have to do this. Watch that it is not changing colors of previous draw.
+	private void setColors(String name, ShaderProgram shader, Batch batch){
+		Vector3[] colors = mMeendle.getBodyPartColors(name);
+		if(colors==null || !shader.isCompiled() || colors.length != 3){
+			//error
+		}else{
+			batch.flush();//TODO hopefully don't have to do this. Watch that it is not changing colors of previous draw.
 			shader.setAttributef("a_color1", colors[RED].x, colors[RED].y, colors[RED].z, 0f);
 		    shader.setAttributef("a_color2", colors[BLUE].x, colors[BLUE].y, colors[BLUE].z, 0f);
 		    shader.setAttributef("a_color3", colors[GREEN].x, colors[GREEN].y, colors[GREEN].z, 0f);
 		}
+	}
+	
+	public void setMeendle(Meendle meendle){
+		mMeendle = meendle;
 	}
 	
 }

@@ -1,4 +1,8 @@
-package com.detour.meendles;
+package com.detour.meendles.genes;
+
+import com.detour.meendles.Gene;
+import com.detour.meendles.GeneTypeSingleTrait;
+import com.detour.meendles.Meendle;
 
 public class GeneBodyColor extends GeneTypeSingleTrait{
 	
