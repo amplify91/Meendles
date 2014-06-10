@@ -16,14 +16,7 @@ public abstract class Gene {
 		mDescription = descr;
 	}
 	
-	public static void setAlleleDominances(Gene[] alleles){
-		//arrange least to most dominant
-		float x = 1.0f / (float)alleles.length;
-		for(int i=0;i<alleles.length;i++){
-			alleles[i].mDominance = (float)(i+1) * x;
-		}
-		
-	}
+	public abstract void build(Meendle meendle);
 	
 	public int getLocation(){
 		return mLocation;
@@ -39,6 +32,10 @@ public abstract class Gene {
 	
 	public void setAlleleNumber(int alleleNumber){
 		mAlleleNumber = alleleNumber;
+	}
+	
+	public void setDominanceFactor(float dominance){
+		mDominance = dominance;
 	}
 	
 	public float getDominanceFactor(){

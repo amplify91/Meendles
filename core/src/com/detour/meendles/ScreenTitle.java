@@ -46,12 +46,14 @@ public class ScreenTitle implements Screen{
 	    program.setAttributef("a_color2", 0f, 1f, 0f, 0f);
 	    program.setAttributef("a_color3", 0f, 0f, 1f, 0f);
 		batch.draw(breed, width/3f, height - (width/3f), width/3f, width/3f);
-		mPet1.draw(batch);
-		mPet2.draw(batch);
-		mPet3.draw(batch);
-		mPet4.draw(batch);
-		mPet5.draw(batch);
-		mPet6.draw(batch);
+		mPet1.update();
+		mPet1.draw(batch, program);
+		mPet2.update();
+		mPet2.draw(batch, program);
+		mPet3.update();
+		mPet3.draw(batch, program);
+		mPet4.update();
+		mPet4.draw(batch, program);
 		batch.end();
 	}
 
@@ -104,7 +106,7 @@ public class ScreenTitle implements Screen{
 		
 		breed = new Texture("breed.png");
 		width = Gdx.graphics.getWidth();
-		w = width/6;
+		w = width/4;
 		height = Gdx.graphics.getHeight();
 		Gdx.input.setInputProcessor(new Input());
 		init();
@@ -121,13 +123,11 @@ public class ScreenTitle implements Screen{
 		
 		//int h = height/6;
 		
-		mPet1 = new Meendle(0, 0);
-		mPet2 = new Meendle(w, 0);
-		mPet3 = new Meendle(w*2, 0);
-		mPet4 = new Meendle(w*3, 0);
-		mPet5 = new Meendle(w*4, 0);
-		mPet6 = new Meendle(w*5, 0);
-		mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4,mPet5,mPet6};
+		mPet1 = new Meendle(w/2f, 0);
+		mPet2 = new Meendle(w*1.5f, 0);
+		mPet3 = new Meendle(w*2.5f, 0);
+		mPet4 = new Meendle(w*3.5f, 0);
+		mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4};
 		
 		
 	}
@@ -147,13 +147,11 @@ public class ScreenTitle implements Screen{
 			}
 		}
 		if(mother!=null && father!=null){
-			mPet1 = new Meendle(0, 0, mother, father);
-			mPet2 = new Meendle(w, 0, mother, father);
-			mPet3 = new Meendle(w*2, 0, mother, father);
-			mPet4 = new Meendle(w*3, 0, mother, father);
-			mPet5 = new Meendle(w*4, 0, mother, father);
-			mPet6 = new Meendle(w*5, 0, mother, father);
-			mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4,mPet5,mPet6};
+			mPet1 = new Meendle(w/2f, 0, mother, father);
+			mPet2 = new Meendle(w*1.5f, 0, mother, father);
+			mPet3 = new Meendle(w*2.5f, 0, mother, father);
+			mPet4 = new Meendle(w*3.5f, 0, mother, father);
+			mPets = new Meendle[]{mPet1,mPet2,mPet3,mPet4};
 		}else{
 			init();
 		}

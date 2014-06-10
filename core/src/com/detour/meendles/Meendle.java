@@ -6,10 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector3;
-import com.detour.meendles.genes.GeneBodyColor;
-import com.detour.meendles.genes.GeneBodyShape;
-import com.detour.meendles.genes.GeneDesignColor;
-import com.detour.meendles.genes.GeneDesignShape;
 import com.esotericsoftware.spine.AnimationState;
 import com.esotericsoftware.spine.AnimationStateData;
 import com.esotericsoftware.spine.Skeleton;
@@ -20,37 +16,25 @@ public class Meendle extends Sprite{
 	
 	private MeendleData mData;
 	private static MeendleRenderer mRenderer = new MeendleRenderer();//TODO
-	private Skeleton mSkeleton;
+	public Skeleton mSkeleton;
 	private AnimationState mState;
-	//private static TextureAtlas mMeendlesTextureAtlas = new TextureAtlas(Gdx.files.internal("spineboy/spineboy.atlas"));
+	private static TextureAtlas mMeendlesTextureAtlas = new TextureAtlas(Gdx.files.internal("spine/skeleton.atlas"));
 	
 	private Genome mGenome = null;
 	Texture mBody = null;
 	Texture mDesign = null;
-	Texture mSelected = SELECTED;
+	//Texture mSelected = SELECTED;
 	private boolean isSelected = false;
 	public static final float WIDTH = Gdx.graphics.getWidth() / 8f;
 	public static final float HEIGHT = WIDTH;
 	
-	public static final Texture RED_CIRCLE = new Texture("redcircle.png");
-	public static final Texture RED_TRIANGLE = new Texture("redtriangle.png");
-	public static final Texture RED_SQUARE = new Texture("redsquare.png");
-	public static final Texture YELLOW_CIRCLE = new Texture("yellowcircle.png");
-	public static final Texture YELLOW_TRIANGLE = new Texture("yellowtriangle.png");
-	public static final Texture YELLOW_SQUARE = new Texture("yellowsquare.png");
-	public static final Texture BLUE_CIRCLE = new Texture("bluecircle.png");
-	public static final Texture BLUE_TRIANGLE = new Texture("bluetriangle.png");
-	public static final Texture BLUE_SQUARE = new Texture("bluesquare.png");
-	public static final Texture SELECTED = new Texture("selected.png");
-	public static final Texture UGLY = new Texture("ugly.png");
-	
 	public Meendle(){
-		/*SkeletonJson json = new SkeletonJson(mMeendlesTextureAtlas); // This loads skeleton JSON data, which is stateless.
-		//json.setScale(0.6f); // Load the skeleton at 60% the size it was in Spine.
-		SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal("spineboy/spineboy.json"));
+		SkeletonJson json = new SkeletonJson(mMeendlesTextureAtlas); // This loads skeleton JSON data, which is stateless.
+		json.setScale(0.6f); // Load the skeleton at 60% the size it was in Spine.
+		SkeletonData skeletonData = json.readSkeletonData(Gdx.files.internal("spine/skeleton.json"));
 
 		mSkeleton = new Skeleton(skeletonData); // Skeleton holds skeleton state (bone positions, slot attachments, etc).
-		mSkeleton.setPosition(250, 20);
+		mSkeleton.updateWorldTransform();
 
 		AnimationStateData stateData = new AnimationStateData(skeletonData); // Defines mixing (crossfading) between animations.
 		//stateData.setMix("run", "jump", 0.2f);
@@ -60,20 +44,19 @@ public class Meendle extends Sprite{
 		//mState.setTimeScale(0.5f); // Slow all animations down to 50% speed.
 		//mState.setAnimation(0, "run", true);
 		//mState.addAnimation(0, "jump", false, 2); // Jump after 2 seconds.
-		//mState.addAnimation(0, "run", true, 0); // Run after the jump.*/
+		//mState.addAnimation(0, "run", true, 0); // Run after the jump.
+		mData = new MeendleData(this);
 	}
 	
 	public Meendle(float x, float y){
+		this();
 		mPosX = x;
 		mPosY = y;
-		if(mGenome!=null){
-			createFromGenome(mGenome);
-		}else{
-			createRandom();
-		}
+		create();
 	}
 	
 	public Meendle(float x, float y, Genome genome){
+		this();
 		mPosX = x;
 		mPosY = y;
 		createFromGenome(genome);
@@ -87,11 +70,6 @@ public class Meendle extends Sprite{
 	}
 	
 	public void draw(SpriteBatch sb){
-		if(isSelected){
-			sb.draw(mSelected, mPosX-2, mPosY-2, WIDTH+4, HEIGHT+4);
-		}
-		sb.draw(mBody, mPosX, mPosY, WIDTH, HEIGHT);
-		sb.draw(mDesign, mPosX+WIDTH/4f, mPosY+HEIGHT/4f, WIDTH/2f, HEIGHT/2f);
 		
 	}
 	
@@ -100,89 +78,52 @@ public class Meendle extends Sprite{
 		mRenderer.draw(batch, mSkeleton, shader);
 	}
 	
-	public Vector3[] getBodyPartColors(String name){
-		return new Vector3[]{};
+	public void update(){
+		mSkeleton.setPosition(mPosX, mPosY);
 	}
 	
-	public void createRandom(){
-		mGenome = new Genome(Genome.generateRandomGenome());
+	public Vector3[] getBodyPartColors(String name){
+		switch(name){
+		case "head": return new Vector3[]{mData.headColor1,mData.headColor2,mData.headColor3};
+		case "body": return new Vector3[]{mData.bodyColor1,mData.bodyColor2,mData.bodyColor3};
+		default: return new Vector3[]{mData.headColor1,mData.headColor2,mData.headColor3};
+		}
+		
+	}
+	
+	public void create(){
+		if(mGenome==null){
+			mGenome = new Genome(Genome.generateRandomGenome());
+		}
 		createFromGenome(mGenome);
 	}
 	
-	public void createFromGenome(Genome genome){
+	private void createFromGenome(Genome genome){
 		Gene[][] geno = genome.getGenome();
 		Gene[] pheno = new Gene[Genome.GENOME_LENGTH];
 		for(int i=0;i<Genome.GENOME_LENGTH;i++){
-			Gene.setAlleleDominances(Genome.mCompleteGenome[i]);
 			if(geno[Genome.CHROMATID_LEFT][i].getDominanceFactor()>=geno[Genome.CHROMATID_RIGHT][i].getDominanceFactor()){
 				pheno[i] = geno[Genome.CHROMATID_LEFT][i];
 			}else{
 				pheno[i] = geno[Genome.CHROMATID_RIGHT][i];
 			}
 		}
-		
 		for(int i=0;i<Genome.GENOME_LENGTH;i++){
-			System.out.print(((GeneTypeSingleTrait)geno[Genome.CHROMATID_LEFT][i]).mTrait);
-			System.out.print(((GeneTypeSingleTrait)geno[Genome.CHROMATID_RIGHT][i]).mTrait);
-			System.out.print(" ");
+			pheno[i].build(this);
 		}
-		System.out.println();
-		for(int i=0;i<pheno.length;i++){
-			System.out.print(((GeneTypeSingleTrait)pheno[i]).mTrait + "  ");
-		}
-		System.out.println();
-		
-		if(((GeneTypeSingleTrait)pheno[0]).getTrait()==GeneBodyColor.RED){
-			if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.CIRCLE){
-				mBody = RED_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.TRIANGLE){
-				mBody = RED_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.SQUARE){
-				mBody = RED_SQUARE;
-			}
-		}else if(((GeneTypeSingleTrait)pheno[0]).getTrait()==GeneBodyColor.YELLOW){
-			if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.CIRCLE){
-				mBody = YELLOW_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.TRIANGLE){
-				mBody = YELLOW_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.SQUARE){
-				mBody = YELLOW_SQUARE;
-			}
-		}else if(((GeneTypeSingleTrait)pheno[0]).getTrait()==GeneBodyColor.BLUE){
-			if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.CIRCLE){
-				mBody = BLUE_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.TRIANGLE){
-				mBody = BLUE_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[1]).getTrait()==GeneBodyShape.SQUARE){
-				mBody = BLUE_SQUARE;
-			}
-		}
-		
-		if(((GeneTypeSingleTrait)pheno[2]).getTrait()==GeneDesignColor.RED){
-			if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.CIRCLE){
-				mDesign = RED_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.TRIANGLE){
-				mDesign = RED_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.SQUARE){
-				mDesign = RED_SQUARE;
-			}
-		}else if(((GeneTypeSingleTrait)pheno[2]).getTrait()==GeneDesignColor.YELLOW){
-			if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.CIRCLE){
-				mDesign = YELLOW_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.TRIANGLE){
-				mDesign = YELLOW_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.SQUARE){
-				mDesign = YELLOW_SQUARE;
-			}
-		}else if(((GeneTypeSingleTrait)pheno[2]).getTrait()==GeneDesignColor.BLUE){
-			if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.CIRCLE){
-				mDesign = BLUE_CIRCLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.TRIANGLE){
-				mDesign = BLUE_TRIANGLE;
-			}else if(((GeneTypeSingleTrait)pheno[3]).getTrait()==GeneDesignShape.SQUARE){
-				mDesign = BLUE_SQUARE;
-			}
-		}
+		mSkeleton.setAttachment("head", mData.headShape+mData.pattern+mData.skinType);
+		mSkeleton.setAttachment("body", mData.bodyShape+mData.pattern+mData.skinType);
+		//mSkeleton.setAttachment("tail", mData.tailShape+mData.pattern+mData.skinType);
+		mSkeleton.updateWorldTransform();
+		createName();
+	}
+	
+	private void createName(){
+		//TODO
+	}
+	
+	public MeendleData getData(){
+		return mData;
 	}
 	
 	public Genome getGenome(){

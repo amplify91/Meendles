@@ -19,9 +19,9 @@ import com.esotericsoftware.spine.attachments.SkinnedMeshAttachment;
 
 public class MeendleRenderer extends SkeletonRenderer{
 	
-	private final static int RED = 1;
-	private final static int BLUE = 2;
-	private final static int GREEN = 3;
+	private final static int RED = 0;
+	private final static int BLUE = 1;
+	private final static int GREEN = 2;
 	
 	private Meendle mMeendle;
 	

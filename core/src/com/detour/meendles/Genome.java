@@ -2,20 +2,33 @@ package com.detour.meendles;
 
 import java.util.Random;
 
-import com.detour.meendles.genes.GeneBodyColor;
+import com.detour.meendles.genes.GeneBodyPrimaryColor;
+import com.detour.meendles.genes.GeneBodyScale;
+import com.detour.meendles.genes.GeneBodySecondaryColor;
 import com.detour.meendles.genes.GeneBodyShape;
-import com.detour.meendles.genes.GeneDesignColor;
-import com.detour.meendles.genes.GeneDesignShape;
+import com.detour.meendles.genes.GeneBodyTertiaryColor;
+import com.detour.meendles.genes.GeneHeadPrimaryColor;
+import com.detour.meendles.genes.GeneHeadScale;
+import com.detour.meendles.genes.GeneHeadSecondaryColor;
+import com.detour.meendles.genes.GeneHeadShape;
+import com.detour.meendles.genes.GeneHeadTertiaryColor;
+import com.detour.meendles.genes.GenePattern;
+import com.detour.meendles.genes.GeneSkinType;
 
 public class Genome {
 	
-	Gene[][] mGenome = new Gene[2][GENOME_LENGTH];
-	public static final Gene[][] mCompleteGenome = new Gene[][]{GeneBodyColor.ALLELES,GeneBodyShape.ALLELES,GeneDesignColor.ALLELES,GeneDesignShape.ALLELES}; //TODO needs generated
 	private static boolean isInitialized = false;
+	
+	public static final Gene[][] mCompleteGenome = new Gene[][]{
+		GeneHeadShape.ALLELES, GeneHeadPrimaryColor.ALLELES, GeneHeadSecondaryColor.ALLELES, GeneHeadTertiaryColor.ALLELES, GeneHeadScale.ALLELES,
+		GeneBodyShape.ALLELES, GeneBodyPrimaryColor.ALLELES, GeneBodySecondaryColor.ALLELES, GeneBodyTertiaryColor.ALLELES, GeneBodyScale.ALLELES,
+		GenePattern.ALLELES, GeneSkinType.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;
 	public static final int CHROMATID_RIGHT = 1; //father
 	public static final int CHROMATID_LEFT = 0; //mother
+	
+	Gene[][] mGenome = new Gene[2][GENOME_LENGTH];
 	
 	public Genome(Gene[][] genome){
 		mGenome = genome;
@@ -89,11 +102,14 @@ public class Genome {
 	
 	private static void initializeGenome(Gene[][] genome){
 		if(!isInitialized){
-			for(int i = 0;i<genome.length;i++){
+			for(int i = 0;i<GENOME_LENGTH;i++){
+				float x = 1.0f / (float)genome[i].length;
 				for(int j = 0;j<genome[i].length;j++){
 					genome[i][j].setLocation(i);
 					genome[i][j].setAlleleNumber(j);
+					genome[i][j].setDominanceFactor((float)(j+1) * x);
 				}
+				
 			}
 			isInitialized = true;
 		}

@@ -3,22 +3,23 @@ package com.detour.meendles.genes;
 import com.detour.meendles.Gene;
 import com.detour.meendles.Meendle;
 
-public class GeneBodyShape extends Gene{
+public class GeneHeadShape extends Gene{
 	
-	private String shape;
+	String shape;
 	
-	public static final GeneBodyShape PLACEHOLDER = new GeneBodyShape("body_1", "", "", "");
+	public static final GeneHeadShape PLACEHOLDER = new GeneHeadShape("head_1", "", "", "");
 	
 	public static final Gene[] ALLELES = new Gene[]{PLACEHOLDER};
 	
-	public GeneBodyShape(String shapeName, String name, String abbr, String descr) {
+	public GeneHeadShape(String shapeName, String name, String abbr, String descr) {
 		super(name, abbr, descr);
 		shape = shapeName;
 	}
 
 	@Override
 	public void build(Meendle meendle) {
-		meendle.getData().bodyShape = shape;
+		meendle.getData().headShape = shape;
+		
 	}
-	
+
 }
