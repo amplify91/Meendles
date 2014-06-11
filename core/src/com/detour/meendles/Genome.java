@@ -14,14 +14,20 @@ import com.detour.meendles.genes.GeneHeadShape;
 import com.detour.meendles.genes.GeneHeadTertiaryColor;
 import com.detour.meendles.genes.GenePattern;
 import com.detour.meendles.genes.GeneSkinType;
+import com.detour.meendles.genes.GeneTailPrimaryColor;
+import com.detour.meendles.genes.GeneTailScale;
+import com.detour.meendles.genes.GeneTailSecondaryColor;
+import com.detour.meendles.genes.GeneTailShape;
+import com.detour.meendles.genes.GeneTailTertiaryColor;
 
 public class Genome {
 	
 	private static boolean isInitialized = false;
 	
-	public static final Gene[][] mCompleteGenome = new Gene[][]{
+	public static final Gene[][] mCompleteGenome = new Gene[][]{ //TODO possibly change these to enums?
 		GeneHeadShape.ALLELES, GeneHeadPrimaryColor.ALLELES, GeneHeadSecondaryColor.ALLELES, GeneHeadTertiaryColor.ALLELES, GeneHeadScale.ALLELES,
 		GeneBodyShape.ALLELES, GeneBodyPrimaryColor.ALLELES, GeneBodySecondaryColor.ALLELES, GeneBodyTertiaryColor.ALLELES, GeneBodyScale.ALLELES,
+		GeneTailShape.ALLELES, GeneTailPrimaryColor.ALLELES, GeneTailSecondaryColor.ALLELES, GeneTailTertiaryColor.ALLELES, GeneTailScale.ALLELES,
 		GenePattern.ALLELES, GeneSkinType.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;

@@ -63,6 +63,7 @@ public class Meendle extends Sprite{
 	}
 	
 	public Meendle(float x, float y, Meendle mother, Meendle father){
+		this();
 		mPosX = x;
 		mPosY = y;
 		mGenome = new Genome(mother, father);
@@ -74,12 +75,16 @@ public class Meendle extends Sprite{
 	}
 	
 	public void draw(SpriteBatch batch, ShaderProgram shader){
+		if(isSelected){
+			mSkeleton.setY(mSkeleton.getY()+40);
+		}
 		mRenderer.setMeendle(this);
 		mRenderer.draw(batch, mSkeleton, shader);
 	}
 	
 	public void update(){
 		mSkeleton.setPosition(mPosX, mPosY);
+		mSkeleton.updateWorldTransform();
 	}
 	
 	public Vector3[] getBodyPartColors(String name){

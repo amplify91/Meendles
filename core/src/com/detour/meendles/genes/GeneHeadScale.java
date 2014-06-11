@@ -20,7 +20,7 @@ public class GeneHeadScale extends Gene{
 
 	@Override
 	public void build(Meendle meendle) {
-		meendle.mSkeleton.findBone("head").setScale(scale);
+		meendle.mSkeleton.findBone("headParent").setScale(scale);
 	}
 
 }

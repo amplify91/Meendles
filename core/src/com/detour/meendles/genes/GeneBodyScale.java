@@ -8,8 +8,10 @@ public class GeneBodyScale extends Gene{
 	private float scale;
 	
 	public static final GeneBodyScale DEFAULT = new GeneBodyScale(1f, "", "", "");
+	public static final GeneBodyScale TINY = new GeneBodyScale(0.5f, "", "", "");
+	public static final GeneBodyScale HUGE = new GeneBodyScale(1.5f, "", "", "");
 	
-	public static final Gene[] ALLELES = new Gene[]{DEFAULT};
+	public static final Gene[] ALLELES = new Gene[]{DEFAULT, TINY, HUGE};
 	
 	public GeneBodyScale(float scale, String name, String abbr, String descr) {
 		super(name, abbr, descr);
@@ -18,7 +20,7 @@ public class GeneBodyScale extends Gene{
 
 	@Override
 	public void build(Meendle meendle) {
-		meendle.mSkeleton.findBone("body").setScale(scale);
+		meendle.mSkeleton.findBone("bodyParent").setScale(scale);
 	}
 	
 }

@@ -34,7 +34,7 @@ public class Input implements InputProcessor{
 		//System.out.println("touchUp at "+screenX + ", " + screenY);
 		if(screenY>=Gdx.graphics.getHeight()-Meendle.HEIGHT){
 			for(int i=0;i<ScreenTitle.mPets.length;i++){
-				if(screenX>ScreenTitle.mPets[i].mPosX && screenX<ScreenTitle.mPets[i].mPosX+Meendle.WIDTH){
+				if(screenX>ScreenTitle.mPets[i].mPosX-Meendle.WIDTH && screenX<ScreenTitle.mPets[i].mPosX+Meendle.WIDTH){
 					ScreenTitle.mPets[i].toggleSelected();
 					return true;
 				}
