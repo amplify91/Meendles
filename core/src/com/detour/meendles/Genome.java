@@ -2,32 +2,26 @@ package com.detour.meendles;
 
 import java.util.Random;
 
-import com.detour.meendles.genes.GeneBodyPrimaryColor;
+import com.detour.meendles.genes.GeneBodyColors;
 import com.detour.meendles.genes.GeneBodyScale;
-import com.detour.meendles.genes.GeneBodySecondaryColor;
 import com.detour.meendles.genes.GeneBodyShape;
-import com.detour.meendles.genes.GeneBodyTertiaryColor;
-import com.detour.meendles.genes.GeneHeadPrimaryColor;
+import com.detour.meendles.genes.GeneHeadColors;
 import com.detour.meendles.genes.GeneHeadScale;
-import com.detour.meendles.genes.GeneHeadSecondaryColor;
 import com.detour.meendles.genes.GeneHeadShape;
-import com.detour.meendles.genes.GeneHeadTertiaryColor;
 import com.detour.meendles.genes.GenePattern;
 import com.detour.meendles.genes.GeneSkinType;
-import com.detour.meendles.genes.GeneTailPrimaryColor;
+import com.detour.meendles.genes.GeneTailColors;
 import com.detour.meendles.genes.GeneTailScale;
-import com.detour.meendles.genes.GeneTailSecondaryColor;
 import com.detour.meendles.genes.GeneTailShape;
-import com.detour.meendles.genes.GeneTailTertiaryColor;
 
 public class Genome {
 	
 	private static boolean isInitialized = false;
 	
 	public static final Gene[][] mCompleteGenome = new Gene[][]{ //TODO possibly change these to enums?
-		GeneHeadShape.ALLELES, GeneHeadPrimaryColor.ALLELES, GeneHeadSecondaryColor.ALLELES, GeneHeadTertiaryColor.ALLELES, GeneHeadScale.ALLELES,
-		GeneBodyShape.ALLELES, GeneBodyPrimaryColor.ALLELES, GeneBodySecondaryColor.ALLELES, GeneBodyTertiaryColor.ALLELES, GeneBodyScale.ALLELES,
-		GeneTailShape.ALLELES, GeneTailPrimaryColor.ALLELES, GeneTailSecondaryColor.ALLELES, GeneTailTertiaryColor.ALLELES, GeneTailScale.ALLELES,
+		GeneHeadShape.ALLELES, GeneHeadColors.ALLELES, GeneHeadScale.ALLELES,
+		GeneBodyShape.ALLELES, GeneBodyColors.ALLELES, GeneBodyScale.ALLELES,
+		GeneTailShape.ALLELES, GeneTailColors.ALLELES, GeneTailScale.ALLELES,
 		GenePattern.ALLELES, GeneSkinType.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;

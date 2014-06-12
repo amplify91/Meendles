@@ -7,46 +7,42 @@ public enum Colors {
 	BLACK(0.0f, 0.0f, 0.0f),
 	WHITE(1.0f, 1.0f, 1.0f);
 	
-	public enum Pallets {
+	public enum Pallet {
 		
-		BASIC(new Colors[]{WHITE},
-				new Colors[]{WHITE},
-				new Colors[]{WHITE});
+		BASIC(WHITE, WHITE, WHITE);
 		
-		private Colors[] primaryColors;
-		private Colors[] secondaryColors;
-		private Colors[] tertiaryColors;
+		private Colors primaryColor;
+		private Colors secondaryColor;
+		private Colors tertiaryColor;
 		
-		private Pallets(Colors[] primaries,
-				Colors[] secondaries,
-				Colors[] tertiaries){
-			setPrimaryColors(primaries);
-			setSecondaryColors(secondaries);
-			setTertiaryColors(tertiaries);
+		private Pallet(Colors primary, Colors secondary, Colors tertiary){
+			setPrimaryColor(primary);
+			setSecondaryColor(secondary);
+			setTertiaryColor(tertiary);
 		}
 
-		public Colors[] getPrimaryColors() {
-			return primaryColors;
+		public Colors getPrimaryColor() {
+			return primaryColor;
 		}
 
-		private void setPrimaryColors(Colors[] primaries) {
-			this.primaryColors = primaries;
+		private void setPrimaryColor(Colors primary) {
+			this.primaryColor = primary;
 		}
 
-		public Colors[] getSecondaryColors() {
-			return secondaryColors;
+		public Colors getSecondaryColor() {
+			return secondaryColor;
 		}
 
-		private void setSecondaryColors(Colors[] secondaryColors) {
-			this.secondaryColors = secondaryColors;
+		private void setSecondaryColor(Colors secondary) {
+			this.secondaryColor = secondary;
 		}
 
-		public Colors[] getTertiaryColors() {
-			return tertiaryColors;
+		public Colors getTertiaryColor() {
+			return tertiaryColor;
 		}
 
-		private void setTertiaryColors(Colors[] tertiaryColors) {
-			this.tertiaryColors = tertiaryColors;
+		private void setTertiaryColor(Colors tertiary) {
+			this.tertiaryColor = tertiary;
 		}
 
 	}
