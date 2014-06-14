@@ -31,7 +31,6 @@ public class MeendleData {
 	public Vector3 tailColor3;
 	public String skinType = "";
 	public String pattern = "";
-	public int colorPallet;
 	
 	public MeendleData(Meendle meendle){
 		this.meendle = meendle;
