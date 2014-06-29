@@ -91,6 +91,8 @@ public class Meendle extends Sprite{
 		switch(name){
 		case "head": return new Vector3[]{mData.headColor1,mData.headColor2,mData.headColor3};
 		case "body": return new Vector3[]{mData.bodyColor1,mData.bodyColor2,mData.bodyColor3};
+		case "tail": return new Vector3[]{mData.tailColor1,mData.tailColor2,mData.tailColor3};
+		case "eyes": return new Vector3[]{mData.eyesColor1,mData.eyesColor2,mData.eyesColor3};
 		default: return new Vector3[]{mData.headColor1,mData.headColor2,mData.headColor3};
 		}
 		
@@ -118,7 +120,8 @@ public class Meendle extends Sprite{
 		}
 		mSkeleton.setAttachment("head", mData.headShape+mData.pattern+mData.skinType);
 		mSkeleton.setAttachment("body", mData.bodyShape+mData.pattern+mData.skinType);
-		//mSkeleton.setAttachment("tail", mData.tailShape+mData.pattern+mData.skinType);
+		mSkeleton.setAttachment("tail", mData.tailShape+mData.pattern+mData.skinType);
+		mSkeleton.setAttachment("eyes", mData.eyesShape);
 		mSkeleton.updateWorldTransform();
 		createName();
 	}

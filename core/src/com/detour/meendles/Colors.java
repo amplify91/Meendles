@@ -5,11 +5,18 @@ import com.badlogic.gdx.math.Vector3;
 public enum Colors {
 	
 	BLACK(0.0f, 0.0f, 0.0f),
-	WHITE(1.0f, 1.0f, 1.0f);
+	WHITE(1.0f, 1.0f, 1.0f),
+	RED(1.0f, 0.0f, 0.0f),
+	GREEN(0.0f, 1.0f, 0.0f),
+	BLUE(0.0f, 0.0f, 1.0f);
 	
 	public enum Pallet {
 		
-		BASIC(WHITE, WHITE, WHITE);
+		BASIC(WHITE, WHITE, WHITE),
+		MONO_RED(RED, RED, RED),
+		MONO_GREEN(GREEN, GREEN, GREEN),
+		MONO_BLUE(BLUE, BLUE, BLUE),
+		RGB(RED, GREEN, BLUE);
 		
 		private Colors primaryColor;
 		private Colors secondaryColor;

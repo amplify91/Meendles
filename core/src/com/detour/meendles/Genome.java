@@ -5,6 +5,9 @@ import java.util.Random;
 import com.detour.meendles.genes.GeneBodyColors;
 import com.detour.meendles.genes.GeneBodyScale;
 import com.detour.meendles.genes.GeneBodyShape;
+import com.detour.meendles.genes.GeneEyesColors;
+import com.detour.meendles.genes.GeneEyesScale;
+import com.detour.meendles.genes.GeneEyesShape;
 import com.detour.meendles.genes.GeneHeadColors;
 import com.detour.meendles.genes.GeneHeadScale;
 import com.detour.meendles.genes.GeneHeadShape;
@@ -19,10 +22,11 @@ public class Genome {
 	private static boolean isInitialized = false;
 	
 	public static final Gene[][] mCompleteGenome = new Gene[][]{ //TODO possibly change these to enums?
-		GeneHeadShape.ALLELES, GeneHeadColors.ALLELES, GeneHeadScale.ALLELES,
-		GeneBodyShape.ALLELES, GeneBodyColors.ALLELES, GeneBodyScale.ALLELES,
-		GeneTailShape.ALLELES, GeneTailColors.ALLELES, GeneTailScale.ALLELES,
-		GenePattern.ALLELES, GeneSkinType.ALLELES}; //TODO needs generated
+		GeneHeadShape.ALLELES, GeneHeadScale.ALLELES, GeneHeadColors.ALLELES,
+		GeneBodyShape.ALLELES, GeneBodyScale.ALLELES, GeneBodyColors.ALLELES,
+		GeneTailShape.ALLELES, GeneTailScale.ALLELES, GeneTailColors.ALLELES,
+		GenePattern.ALLELES, GeneSkinType.ALLELES,
+		GeneEyesShape.ALLELES, GeneEyesScale.ALLELES, GeneEyesColors.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;
 	public static final int CHROMATID_RIGHT = 1; //father

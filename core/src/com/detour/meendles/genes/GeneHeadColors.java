@@ -9,8 +9,11 @@ public class GeneHeadColors extends Gene {
 	private Pallet colors;
 	
 	public static final GeneHeadColors PLACEHOLDER = new GeneHeadColors(Pallet.BASIC, "", "", "");
+	public static final GeneHeadColors RED = new GeneHeadColors(Pallet.MONO_RED, "", "", "");
+	public static final GeneHeadColors BLUE = new GeneHeadColors(Pallet.MONO_BLUE, "", "", "");
+	public static final GeneHeadColors GREEN = new GeneHeadColors(Pallet.MONO_GREEN, "", "", "");
 	
-	public static final Gene[] ALLELES = new Gene[]{PLACEHOLDER};
+	public static final Gene[] ALLELES = new Gene[]{PLACEHOLDER,BLUE,GREEN,RED};
 	
 	public GeneHeadColors(Pallet colors, String name, String abbr, String descr) {
 		super(name, abbr, descr);
