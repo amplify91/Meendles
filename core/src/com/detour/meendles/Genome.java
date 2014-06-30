@@ -5,6 +5,9 @@ import java.util.Random;
 import com.detour.meendles.genes.GeneBodyColors;
 import com.detour.meendles.genes.GeneBodyScale;
 import com.detour.meendles.genes.GeneBodyShape;
+import com.detour.meendles.genes.GeneEyebrowsColors;
+import com.detour.meendles.genes.GeneEyebrowsScale;
+import com.detour.meendles.genes.GeneEyebrowsShape;
 import com.detour.meendles.genes.GeneEyesColors;
 import com.detour.meendles.genes.GeneEyesScale;
 import com.detour.meendles.genes.GeneEyesShape;
@@ -26,7 +29,8 @@ public class Genome {
 		GeneBodyShape.ALLELES, GeneBodyScale.ALLELES, GeneBodyColors.ALLELES,
 		GeneTailShape.ALLELES, GeneTailScale.ALLELES, GeneTailColors.ALLELES,
 		GenePattern.ALLELES, GeneSkinType.ALLELES,
-		GeneEyesShape.ALLELES, GeneEyesScale.ALLELES, GeneEyesColors.ALLELES}; //TODO needs generated
+		GeneEyesShape.ALLELES, GeneEyesScale.ALLELES, GeneEyesColors.ALLELES,
+		GeneEyebrowsShape.ALLELES, GeneEyebrowsScale.ALLELES, GeneEyebrowsColors.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;
 	public static final int CHROMATID_RIGHT = 1; //father

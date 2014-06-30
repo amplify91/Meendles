@@ -20,7 +20,6 @@ public class GeneSkinType extends Gene{
 	@Override
 	public void build(Meendle meendle) {
 		meendle.getData().skinType = skinType;
-		
 	}
 
 }
