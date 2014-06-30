@@ -5,15 +5,33 @@ import java.util.Random;
 import com.detour.meendles.genes.GeneBodyColors;
 import com.detour.meendles.genes.GeneBodyScale;
 import com.detour.meendles.genes.GeneBodyShape;
+import com.detour.meendles.genes.GeneEarsColors;
+import com.detour.meendles.genes.GeneEarsScale;
+import com.detour.meendles.genes.GeneEarsShape;
 import com.detour.meendles.genes.GeneEyebrowsColors;
 import com.detour.meendles.genes.GeneEyebrowsScale;
 import com.detour.meendles.genes.GeneEyebrowsShape;
 import com.detour.meendles.genes.GeneEyesColors;
 import com.detour.meendles.genes.GeneEyesScale;
 import com.detour.meendles.genes.GeneEyesShape;
+import com.detour.meendles.genes.GeneFacialHairColors;
+import com.detour.meendles.genes.GeneFacialHairScale;
+import com.detour.meendles.genes.GeneFacialHairShape;
+import com.detour.meendles.genes.GeneHairColors;
+import com.detour.meendles.genes.GeneHairScale;
+import com.detour.meendles.genes.GeneHairShape;
+import com.detour.meendles.genes.GeneHatColors;
+import com.detour.meendles.genes.GeneHatScale;
+import com.detour.meendles.genes.GeneHatShape;
 import com.detour.meendles.genes.GeneHeadColors;
 import com.detour.meendles.genes.GeneHeadScale;
 import com.detour.meendles.genes.GeneHeadShape;
+import com.detour.meendles.genes.GeneMouthColors;
+import com.detour.meendles.genes.GeneMouthScale;
+import com.detour.meendles.genes.GeneMouthShape;
+import com.detour.meendles.genes.GeneNoseColors;
+import com.detour.meendles.genes.GeneNoseScale;
+import com.detour.meendles.genes.GeneNoseShape;
 import com.detour.meendles.genes.GenePattern;
 import com.detour.meendles.genes.GeneSkinType;
 import com.detour.meendles.genes.GeneTailColors;
@@ -30,7 +48,13 @@ public class Genome {
 		GeneTailShape.ALLELES, GeneTailScale.ALLELES, GeneTailColors.ALLELES,
 		GenePattern.ALLELES, GeneSkinType.ALLELES,
 		GeneEyesShape.ALLELES, GeneEyesScale.ALLELES, GeneEyesColors.ALLELES,
-		GeneEyebrowsShape.ALLELES, GeneEyebrowsScale.ALLELES, GeneEyebrowsColors.ALLELES}; //TODO needs generated
+		GeneEyebrowsShape.ALLELES, GeneEyebrowsScale.ALLELES, GeneEyebrowsColors.ALLELES,
+		GeneNoseShape.ALLELES, GeneNoseScale.ALLELES, GeneNoseColors.ALLELES,
+		GeneMouthShape.ALLELES, GeneMouthScale.ALLELES, GeneMouthColors.ALLELES,
+		GeneHatShape.ALLELES, GeneHatScale.ALLELES, GeneHatColors.ALLELES,
+		GeneEarsShape.ALLELES, GeneEarsScale.ALLELES, GeneEarsColors.ALLELES,
+		GeneHairShape.ALLELES, GeneHairScale.ALLELES, GeneHairColors.ALLELES,
+		GeneFacialHairShape.ALLELES, GeneFacialHairScale.ALLELES, GeneFacialHairColors.ALLELES}; //TODO needs generated
 	
 	public static final int GENOME_LENGTH = mCompleteGenome.length;
 	public static final int CHROMATID_RIGHT = 1; //father

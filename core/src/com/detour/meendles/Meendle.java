@@ -94,12 +94,12 @@ public class Meendle extends Sprite{
 		case "tail": return new Vector3[]{mData.tailColor1,mData.tailColor2,mData.tailColor3};
 		case "eyes": return new Vector3[]{mData.eyesColor1,mData.eyesColor2,mData.eyesColor3};
 		case "eyebrows": return new Vector3[]{mData.eyebrowsColor1,mData.eyebrowsColor2,mData.eyebrowsColor3};
-		//case "nose": return new Vector3[]{mData.noseColor1,mData.noseColor2,mData.noseColor3};
-		//case "mouth": return new Vector3[]{mData.mouthColor1,mData.mouthColor2,mData.mouthColor3};
-		//case "hat": return new Vector3[]{mData.hatColor1,mData.hatColor2,mData.hatColor3};
-		//case "ears": return new Vector3[]{mData.earsColor1,mData.earsColor2,mData.earsColor3};
-		//case "hair": return new Vector3[]{mData.hairColor1,mData.hairColor2,mData.hairColor3};
-		//case "facialHair": return new Vector3[]{mData.facialHairColor1,mData.facialHairColor2,mData.facialHairColor3};
+		case "nose": return new Vector3[]{mData.noseColor1,mData.noseColor2,mData.noseColor3};
+		case "mouth": return new Vector3[]{mData.mouthColor1,mData.mouthColor2,mData.mouthColor3};
+		case "hat": return new Vector3[]{mData.hatColor1,mData.hatColor2,mData.hatColor3};
+		case "ears": return new Vector3[]{mData.earsColor1,mData.earsColor2,mData.earsColor3};
+		case "hair": return new Vector3[]{mData.hairColor1,mData.hairColor2,mData.hairColor3};
+		case "facialHair": return new Vector3[]{mData.facialHairColor1,mData.facialHairColor2,mData.facialHairColor3};
 		//case "arms": return new Vector3[]{mData.armsColor1,mData.armsColor2,mData.armsColor3};
 		//case "hands": return new Vector3[]{mData.handsColor1,mData.handsColor2,mData.handsColor3};
 		//case "legs": return new Vector3[]{mData.legsColor1,mData.legsColor2,mData.legsColor3};
